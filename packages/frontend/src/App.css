@@ -6,17 +6,17 @@
   padding: 24px;
   color: #fff9f5;
   font-family: 'Audiowide', 'Trebuchet MS', sans-serif;
-  background: radial-gradient(circle at top right, rgba(255, 161, 198, 0.12), transparent 40%),
-    radial-gradient(circle at top left, rgba(105, 235, 255, 0.12), transparent 45%);
+  background: radial-gradient(circle at top right, rgba(255, 120, 186, 0.2), transparent 45%),
+    radial-gradient(circle at top left, rgba(84, 242, 255, 0.2), transparent 45%);
 }
 
 .App-header {
-  background: linear-gradient(135deg, #322063 0%, #2f5aa4 40%, #19b7d8 100%);
+  background: rgba(26, 72, 112, 0.95);
   padding: 24px;
   border-radius: 10px;
   margin-bottom: 18px;
-  border: 1px solid #84f3ff;
-  box-shadow: 0 0 14px rgba(132, 243, 255, 0.45), 0 0 24px rgba(255, 110, 173, 0.28);
+  border: 1px solid #8ff8ff;
+  box-shadow: 0 0 20px rgba(98, 242, 255, 0.85), 0 0 36px rgba(98, 242, 255, 0.45);
 }
 
 .App-header h1 {
@@ -26,7 +26,7 @@
   font-family: 'Press Start 2P', cursive;
   line-height: 1.45;
   color: #ffeec4;
-  text-shadow: 0 0 8px rgba(255, 238, 196, 0.48), 0 0 16px rgba(255, 118, 191, 0.52);
+  text-shadow: 0 0 10px rgba(255, 238, 196, 0.75), 0 0 20px rgba(98, 242, 255, 0.7);
 }
 
 .App-header p {
@@ -49,11 +49,11 @@ main {
 }
 
 section {
-  background: linear-gradient(145deg, rgba(45, 28, 89, 0.94), rgba(36, 73, 145, 0.9));
+  background: rgba(65, 29, 92, 0.94);
   padding: 20px;
   border-radius: 10px;
-  border: 1px solid rgba(122, 235, 255, 0.6);
-  box-shadow: 0 0 12px rgba(122, 235, 255, 0.22), 0 0 18px rgba(255, 103, 177, 0.2);
+  border: 1px solid rgba(255, 133, 197, 0.9);
+  box-shadow: 0 0 16px rgba(255, 115, 188, 0.48), 0 0 28px rgba(255, 115, 188, 0.22);
 }
 
 .task-form,
@@ -78,7 +78,7 @@ section {
 
 input {
   padding: 9px;
-  border: 1px solid #83e7ff;
+  border: 1px solid #9ef3ff;
   border-radius: 4px;
   background: #193460;
   color: #f8feff;
@@ -96,7 +96,7 @@ select {
 
 select {
   padding: 9px;
-  border: 1px solid #83e7ff;
+  border: 1px solid #9ef3ff;
   border-radius: 4px;
   background: #193460;
   color: #f8feff;
@@ -104,7 +104,7 @@ select {
 
 button {
   padding: 9px 16px;
-  background: linear-gradient(90deg, #ffc972 0%, #ff78ba 46%, #7bf1ff 100%);
+  background: #ff64b3;
   color: #2f1550;
   border: none;
   border-radius: 4px;
@@ -113,21 +113,22 @@ button {
   font-family: 'Audiowide', 'Trebuchet MS', 'Arial Black', sans-serif;
   letter-spacing: 0.03em;
   transition: transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
-  box-shadow: 0 0 10px rgba(123, 241, 255, 0.55), 0 0 16px rgba(255, 120, 186, 0.38);
+  box-shadow: 0 0 14px rgba(255, 100, 179, 0.88), 0 0 24px rgba(255, 100, 179, 0.45);
 }
 
 button:hover {
-  filter: brightness(1.08);
+  filter: brightness(1.16);
 }
 
 button:active {
   transform: translateY(1px) scale(0.99);
-  box-shadow: 0 0 6px rgba(255, 201, 114, 0.75);
+  box-shadow: 0 0 10px rgba(255, 100, 179, 0.95);
 }
 
 .secondary-btn {
-  background: linear-gradient(90deg, #8ef5ff 0%, #7da6ff 55%, #d59dff 100%);
+  background: #58f7ff;
   color: #281043;
+  box-shadow: 0 0 14px rgba(88, 247, 255, 0.88), 0 0 24px rgba(88, 247, 255, 0.45);
 }
 
 ul {
@@ -183,10 +184,11 @@ li:last-child {
 }
 
 .delete-btn {
-  background: linear-gradient(90deg, #ff8e8a 0%, #ff73bc 60%, #ffa4e0 100%);
+  background: #ff64b3;
   color: #3d103c;
   padding: 6px 12px;
   font-size: 0.8rem;
+  box-shadow: 0 0 14px rgba(255, 100, 179, 0.88), 0 0 24px rgba(255, 100, 179, 0.45);
 }
 
 .error {
