@@ -16,6 +16,7 @@ Remember, it's self-paced so feel free to take a break! ☕️
 - [Functional Requirements](docs/functional-requirements.md)
 - [UI Guidelines](docs/ui-guidelines.md)
 - [Testing Guidelines](docs/testing-guidelines.md)
+- [Coding Guidelines](docs/coding-guidelines.md)
 
 ---
 
