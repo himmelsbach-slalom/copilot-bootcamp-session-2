@@ -1,0 +1,122 @@
+name: Step 2-5 # Build with Context
+
+on:
+  push:
+    branches:
+      - feature/context
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write
+  issues: write
+
+
+jobs:
+  find_exercise:
+    name: Find Exercise Issue
+    uses: skills/exercise-toolkit/.github/workflows/find-exercise-issue.yml@v0.4.0
+  
+  check_step_work:
+    name: Check step work
+    runs-on: ubuntu-latest
+    needs: [find_exercise]
+    env:
+      ISSUE_URL: ${{ needs.find_exercise.outputs.issue-url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Get response templates
+        uses: actions/checkout@v4
+        with:
+          repository: skills/exercise-toolkit
+          path: exercise-toolkit
+          ref: v0.4.0
+
+      - name: Update comment - checking work
+        run: |
+          gh issue comment "$ISSUE_URL" \
+            --body-file exercise-toolkit/markdown-templates/step-feedback/checking-work.md \
+            --edit-last
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+        # START: Check practical exercise
+
+      - name: Check for tests
+        id: check_tests
+        continue-on-error: true
+        run: |
+          find packages -type f -name '*test.js' | grep -q .
+
+      - name: Build message - step results
+        id: build-message-step-results
+        uses: skills/action-text-variables@v2
+        with:
+          template-file: exercise-toolkit/markdown-templates/step-feedback/step-results-table.md
+          template-vars: |
+            step_number: 2-5
+            passed: ${ steps.check_tests.outcome == 'success' }
+            results_table:
+              - description: "Tests should be present for the code generated."
+                passed: ${{ steps.check_tests.outcome == 'success' }}
+                error_message: "No test files found (e.g., *test.js)."
+
+      - name: Create comment - step results
+        run: |
+          gh issue comment "$ISSUE_URL" \
+            --body "$COMMENT_BODY" \
+            --edit-last
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COMMENT_BODY: ${{ steps.build-message-step-results.outputs.updated-text }}
+
+      - name: Fail job if not all checks passed
+        if: contains(steps.*.outcome, 'failure')
+        run: exit 1
+
+      # END: Check practical exercise
+
+      - name: Success
+        run: echo "Build with context checks passed."
+      
+  post_next_step_content:
+    name: Post next step content
+    needs: [find_exercise, check_step_work]
+    runs-on: ubuntu-latest
+    env:
+      ISSUE_URL: ${{ needs.find_exercise.outputs.issue-url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get response templates
+        uses: actions/checkout@v4
+        with:
+          repository: skills/exercise-toolkit
+          path: exercise-toolkit
+          ref: v0.4.0
+
+      - name: Create comment - add step content
+        run: |
+          gh issue comment "$ISSUE_URL" \
+            --body-file ".github/steps/2-6-validate-tests.md"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Create comment - watching for progress
+        run: |
+          gh issue comment "$ISSUE_URL" \
+            --body-file exercise-toolkit/markdown-templates/step-feedback/watching-for-progress.md
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Disable current workflow
+        run: |
+          gh workflow disable "Step 2-5"
+          gh workflow enable "Step 2-6"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
