@@ -170,18 +170,30 @@ function App() {
               placeholder="Task name"
               aria-label="Task name"
             />
-            <input
-              type="date"
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-              aria-label="Start date"
-            />
-            <input
-              type="date"
-              value={dueDate}
-              onChange={(e) => setDueDate(e.target.value)}
-              aria-label="Due date"
-            />
+            <div className="form-field">
+              <label htmlFor="start-date-input" className="field-label">
+                Start Date
+              </label>
+              <input
+                id="start-date-input"
+                type="date"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+                aria-label="Start date"
+              />
+            </div>
+            <div className="form-field">
+              <label htmlFor="due-date-input" className="field-label">
+                Due Date
+              </label>
+              <input
+                id="due-date-input"
+                type="date"
+                value={dueDate}
+                onChange={(e) => setDueDate(e.target.value)}
+                aria-label="Due date"
+              />
+            </div>
             <button type="submit">{editingTaskId ? 'Update Task' : 'Add Task'}</button>
             {editingTaskId && (
               <button type="button" className="secondary-btn" onClick={resetForm}>
