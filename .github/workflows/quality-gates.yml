@@ -1,0 +1,49 @@
+name: Quality Gates
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+      - feature/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality-checks:
+    name: Test, Build, and Smoke Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run full quality checks
+        run: npm run quality:check
+
+      - name: Run backend performance tests
+        run: npm run test:performance --workspace=backend
+
+      - name: Run backend API smoke test
+        run: |
+          node packages/backend/src/index.js &
+          BACKEND_PID=$!
+          trap "kill $BACKEND_PID" EXIT
+          sleep 3
+          curl --fail --silent --show-error http://localhost:3030/api/tasks > /dev/null
+
+      - name: Run dependency audit (critical only, production deps)
+        run: npm audit --omit=dev --audit-level=critical
