@@ -10,3 +10,4 @@ The project documentation will be built during the bootcamp sessions.
 
 - [Project Overview](../docs/project-overview.md) - Overview of the project
 - [Functional Requirements](../docs/functional-requirements.md) - Functional requirements for the To-Do app
+- [UI Guidelines](../docs/ui-guidelines.md) - UI interface guidance for the To-Do app
