@@ -15,6 +15,7 @@ Remember, it's self-paced so feel free to take a break! ☕️
 - [Project Overview](docs/project-overview.md)
 - [Functional Requirements](docs/functional-requirements.md)
 - [UI Guidelines](docs/ui-guidelines.md)
+- [Testing Guidelines](docs/testing-guidelines.md)
 
 ---
 
